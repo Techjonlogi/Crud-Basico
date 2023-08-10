@@ -5,6 +5,7 @@ import{Tipoi} from '../../Modelos/Tipo.interface';
 import{RespuestaI} from '../../Modelos/Respuesta.interface';
 
 import {Observable} from 'rxjs';
+import { ProductoGuardarI } from 'src/app/Modelos/Producto.Guardari.nterface';
 
 
 @Injectable({
@@ -37,9 +38,9 @@ url:string = "http://localhost/Api/";
   }
 
 
-  postProducto(form:ProductoI):Observable<ProductoI>{
+  postProducto(form:ProductoGuardarI):Observable<ProductoGuardarI>{
     let direccion = this.url + "/productos";
-    return this.http.post<ProductoI>(direccion,form);
+    return this.http.post<ProductoGuardarI>(direccion,form);
   }
   
   putEliiminarProducto(form:ProductoI):Observable<ProductoI>{

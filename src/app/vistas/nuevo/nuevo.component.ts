@@ -4,6 +4,7 @@ import {ApiService} from "../../servicios/api/api.service"
 import { ProductoI } from 'src/app/Modelos/Producto.interface';
 import {Router, ActivatedRoute } from '@angular/router';
 import {AlertasService} from "../../servicios/alertas/alertas.service"
+import { ProductoGuardarI } from 'src/app/Modelos/Producto.Guardari.nterface';
 
 @Component({
   selector: 'app-nuevo',
@@ -30,43 +31,27 @@ export class NuevoComponent {
 
   }
 
-  onSave(id,nombre,tipo,marca,estado){
+  onSave(nombre,tipo,marca){
 
-    let productoEnviar: ProductoI = {
-      IDProducto : id,
+    let productoEnviar: ProductoGuardarI = {
        Nombre: nombre,
       Tipo : tipo,
-      Marca : marca,
-      Estado: estado
+      Marca : marca
   };
   this.api.postProducto(productoEnviar).subscribe(data=>{
-    console.log(data);
+    let respuesta:ProductoGuardarI = data;
+    if(respuesta===null){
+      this.alerta.showError('No se pudo Guardar','Error al guardar');
+    }else{
+      this.alerta.showSucces('Se guardó correctamente','Correcto');
+      this.router.navigate(['dashboard']);
+
+    }
 
   });
 
   }
-  eliminar(id,nombre,tipo,marca,estado){
-    let datos: ProductoI = {
-      IDProducto : id,
-       Nombre: nombre,
-      Tipo : tipo,
-      Marca : marca,
-      Estado: estado
-  };
-  
-    this.api.putEliiminarProducto(datos).subscribe(data=>{
-      let respuesta:ProductoI = data;
-      if(respuesta.Estado===0){
-        this.alerta.showSucces('Se actualizó correctamente','Correcto')
-        this.router.navigate(['dashboard']);
-        
-      }else{
-        this.alerta.showError('No se pudo actualizar','Error al modificar')
-        
-  
-      }
-    });
-  }
+
 
 
   salir(){

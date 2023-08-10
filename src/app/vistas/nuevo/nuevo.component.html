@@ -2,12 +2,8 @@
 <div class="container">
 
 
-<form [formGroup]="nuevoProductoForm" (ngSubmit)="onSave(nuevoProductoForm.value.IDProducto,nuevoProductoForm.value.Nombre,nuevoProductoForm.value.Tipo,nuevoProductoForm.value.Marca,nuevoProductoForm.value.Estado)" >
-        <div class="form-group">
-            <label for="exampleFormControlInput1">Identificador del producto</label>
-            <input type="text" class="form-control" placeholder="Identificador del producto" formControlName="IDProducto">
-    
-    </div>
+<form [formGroup]="nuevoProductoForm" (ngSubmit)="onSave(nuevoProductoForm.value.Nombre,nuevoProductoForm.value.Tipo,nuevoProductoForm.value.Marca)" >
+       
             <div class="form-group">
                     <label for="exampleFormControlInput1">Nombre</label>
                     <input type="text" class="form-control" placeholder="Nombre del producto" formControlName="Nombre">
@@ -23,11 +19,7 @@
             <input type="text" class="form-control" placeholder="Marca del producto" formControlName="Marca">
     
     </div>
-    <div class="form-group">
-        <label for="exampleFormControlInput1">Estado del producto</label>
-        <input type="text" class="form-control" placeholder="estado" formControlName="Estado">
-    
-    </div>
+   
     <br><br>
      <button type="submit" class="btn btn-primary">Guardar Cambios</button>
      <button type="button" class="btn btn-light" (click)="salir()">Salir</button>
