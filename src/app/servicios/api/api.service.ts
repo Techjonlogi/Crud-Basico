@@ -31,16 +31,20 @@ url:string = "http://localhost/Api/";
     return this.http.get<ProductoI>(direccion);
   }
 
-  putProducto(form:ProductoI):Observable<RespuestaI>{
+  putProducto(form:ProductoI):Observable<ProductoI>{
     let direccion = this.url + "update/producto";
-    return this.http.put<RespuestaI>(direccion,form)
+    return this.http.put<ProductoI>(direccion,form);
   }
 
 
-  postProducto(form:ProductoI):Observable<RespuestaI>{
+  postProducto(form:ProductoI):Observable<ProductoI>{
     let direccion = this.url + "/productos";
-    return this.http.post<RespuestaI>(direccion,form)
+    return this.http.post<ProductoI>(direccion,form);
   }
   
+  putEliiminarProducto(form:ProductoI):Observable<ProductoI>{
+    let direccion = this.url + "delete/producto";
+    return this.http.put<ProductoI>(direccion,form);
+  }
 
 }

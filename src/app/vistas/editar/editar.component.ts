@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {Router,ActivatedRoute} from '@angular/router'
 import {ApiService} from "../../servicios/api/api.service"
+import {AlertasService} from "../../servicios/alertas/alertas.service"
 import { ProductoI } from 'src/app/Modelos/Producto.interface';
 import{FormGroup,FormControl,Validators} from '@angular/forms'
 
@@ -25,7 +26,7 @@ export class EditarComponent {
 
 
 
-  constructor(private activerouter:ActivatedRoute, private router:Router, private api:ApiService){
+  constructor(private activerouter:ActivatedRoute, private router:Router, private api:ApiService,private alerta:AlertasService){
 
   }
 
@@ -54,8 +55,16 @@ export class EditarComponent {
       Marca : marca,
       Estado: estado
   };
+ 
   this.api.putProducto(productoEnviar).subscribe(data=>{
-    console.log(data);
+    let respuesta:ProductoI = data;
+    if(respuesta===null){
+      this.alerta.showError('No se pudo actualizar','Error al modificar');
+    }else{
+      this.alerta.showSucces('Se actualizó correctamente','Correcto');
+      this.router.navigate(['dashboard']);
+
+    }
 
   });
     
@@ -63,5 +72,34 @@ export class EditarComponent {
    
 
   }
+
+
+eliminar(id,nombre,tipo,marca,estado){
+  let datos: ProductoI = {
+    IDProducto : id,
+     Nombre: nombre,
+    Tipo : tipo,
+    Marca : marca,
+    Estado: estado
+};
+
+  this.api.putEliiminarProducto(datos).subscribe(data=>{
+    let respuesta:ProductoI = data;
+    if(respuesta.Estado===0){
+      this.alerta.showSucces('Se actualizó correctamente','Correcto')
+      this.router.navigate(['dashboard']);
+      
+    }else{
+      this.alerta.showError('No se pudo actualizar','Error al modificar')
+      
+
+    }
+  });
+}
+
+salir(){
+  this.router.navigate(['dashboard']);
+
+}
 
 }

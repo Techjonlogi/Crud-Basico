@@ -3,6 +3,7 @@ import{FormGroup,FormControl,Validators} from '@angular/forms';
 import {ApiService} from "../../servicios/api/api.service"
 import { ProductoI } from 'src/app/Modelos/Producto.interface';
 import {Router, ActivatedRoute } from '@angular/router';
+import {AlertasService} from "../../servicios/alertas/alertas.service"
 
 @Component({
   selector: 'app-nuevo',
@@ -21,7 +22,7 @@ export class NuevoComponent {
     Estado: new FormControl('',Validators.required)
 
   });
-  constructor(private activerouter:ActivatedRoute, private router:Router, private api:ApiService){
+  constructor(private activerouter:ActivatedRoute, private router:Router, private api:ApiService,private alerta:AlertasService){
 
   }
 
@@ -44,5 +45,34 @@ export class NuevoComponent {
   });
 
   }
+  eliminar(id,nombre,tipo,marca,estado){
+    let datos: ProductoI = {
+      IDProducto : id,
+       Nombre: nombre,
+      Tipo : tipo,
+      Marca : marca,
+      Estado: estado
+  };
+  
+    this.api.putEliiminarProducto(datos).subscribe(data=>{
+      let respuesta:ProductoI = data;
+      if(respuesta.Estado===0){
+        this.alerta.showSucces('Se actualizó correctamente','Correcto')
+        this.router.navigate(['dashboard']);
+        
+      }else{
+        this.alerta.showError('No se pudo actualizar','Error al modificar')
+        
+  
+      }
+    });
+  }
+
+
+  salir(){
+    this.router.navigate(['dashboard']);
+  
+  }
+  
 
 }
