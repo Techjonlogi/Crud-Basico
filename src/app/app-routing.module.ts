@@ -8,7 +8,7 @@ import { NuevoComponent } from './vistas/nuevo/nuevo.component';
 const routes: Routes = [
   {path:'', redirectTo:'dashboard',pathMatch:'full'},
 { path:'dashboard', component:DashboardComponent},
-{ path:'editar', component:EditarComponent},
+{ path:'editar/:id', component:EditarComponent},
 { path:'nuevo', component:NuevoComponent}
 ];
 

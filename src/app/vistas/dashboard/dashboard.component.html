@@ -1,0 +1,35 @@
+<app-header></app-header>
+<div class="container">
+   <h3>Lista de Productos</h3> 
+   <button type="button" class="btn btn-primary" (click)="nuevoProducto()" >Nuevo Producto</button>
+ 
+ <select class="form-select mb-3">
+    <option *ngFor="let tipo of tipos">{{tipo.Nombre}}</option>
+    
+ </select>
+ 
+
+ 
+ 
+   <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Marca</th>
+           
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of productos" (dblclick)="editarProducto(producto.IDProducto)">
+            <th scope="row">{{producto.IDProducto}}</th>
+            <td>{{producto.Nombre}}</td>
+            <td>{{producto.Tipo}}</td>
+            <td>{{producto.Marca}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>>
+
+<app-footer></app-footer>
