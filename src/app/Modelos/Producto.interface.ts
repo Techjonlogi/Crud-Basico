@@ -1,7 +1,7 @@
 export interface ProductoI{
     IDProducto:any;
-    Nombre:string;
+    Nombre:any;
     Tipo:any;
-    Marca:string;
-    Estado:number;
+    Marca:any;
+    Estado:any;
 }

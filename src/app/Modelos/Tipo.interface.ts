@@ -1,6 +1,6 @@
 export interface Tipoi{
-IDTipo:number;
-Nombre:string;
-Estado:number;
+IDTipo:any;
+Nombre:any;
+Estado:any;
 
 }

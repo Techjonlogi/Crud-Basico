@@ -1,6 +1,6 @@
 export interface CaracteristicaI{
-IdCaracteristica:number;
-IDProducto:number;
-Caracteristica:string;
-Estado:number;
+IdCaracteristica:any;
+IDProducto:any;
+Caracteristica:any;
+Estado:any;
 }

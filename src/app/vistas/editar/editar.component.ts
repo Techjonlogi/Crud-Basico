@@ -18,9 +18,12 @@ export class EditarComponent {
     IDProducto:new FormControl(''),
     Nombre: new FormControl(''),
     Tipo: new FormControl(''),
-    Marca: new FormControl('')
+    Marca: new FormControl(''),
+    Estado: new FormControl('')
 
   });
+
+
 
   constructor(private activerouter:ActivatedRoute, private router:Router, private api:ApiService){
 
@@ -34,13 +37,31 @@ export class EditarComponent {
       'IDProducto': this.datosProducto.IDProducto,
       'Nombre': this.datosProducto.Nombre,
       'Tipo': this.datosProducto.Tipo,
-      'Marca': this.datosProducto.Marca
-  
+      'Marca': this.datosProducto.Marca,
+      'Estado': this.datosProducto.Estado
     });
-    console.log(this.editarForm.value)  
+    
   })
      
     
+  }
+
+  postForm(id,nombre,tipo,marca,estado){
+    let productoEnviar: ProductoI = {
+      IDProducto : id,
+       Nombre: nombre,
+      Tipo : tipo,
+      Marca : marca,
+      Estado: estado
+  };
+  this.api.putProducto(productoEnviar).subscribe(data=>{
+    console.log(data);
+
+  });
+    
+    
+   
+
   }
 
 }

@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
 import{ProductoI} from '../../Modelos/Producto.interface';
-import{Tipoi} from '../../Modelos/Tipo.interface'
-import {Observable} from 'rxjs'
+import{Tipoi} from '../../Modelos/Tipo.interface';
+import{RespuestaI} from '../../Modelos/Respuesta.interface';
+
+import {Observable} from 'rxjs';
 
 
 @Injectable({
@@ -27,6 +29,17 @@ url:string = "http://localhost/Api/";
   getProducto(id):Observable<ProductoI>{
     let direccion = this.url + "get/producto/"+id;
     return this.http.get<ProductoI>(direccion);
+  }
+
+  putProducto(form:ProductoI):Observable<RespuestaI>{
+    let direccion = this.url + "update/producto";
+    return this.http.put<RespuestaI>(direccion,form)
+  }
+
+
+  postProducto(form:ProductoI):Observable<RespuestaI>{
+    let direccion = this.url + "/productos";
+    return this.http.post<RespuestaI>(direccion,form)
   }
   
 
